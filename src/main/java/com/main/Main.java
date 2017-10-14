@@ -2,22 +2,21 @@ package com.main;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.frank.aop.AopConfig;
-import com.frank.aop.annotaton.DemoAnnotationService;
-import com.frank.aop.method.DemoMethodService;
+import com.scope.DemoPropertyService;
+import com.scope.DemoSingletonService;
 
 public class Main {
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext context= 
-				new AnnotationConfigApplicationContext(AopConfig.class);
+				new AnnotationConfigApplicationContext(Config.class);
+		DemoSingletonService s1=context.getBean(DemoSingletonService.class);
+		DemoSingletonService s2=context.getBean(DemoSingletonService.class);
+		DemoPropertyService p1=context.getBean(DemoPropertyService.class);
+		DemoPropertyService p2=context.getBean(DemoPropertyService.class);
 		
-		DemoAnnotationService demoAnnotationService = context.getBean(DemoAnnotationService.class);
+		System.out.println("s1与s2是否相等" + s1.equals(s2) +"");
+		System.out.println("p1与p2是否相等" + p1.equals(p2) +"");
 		
-		DemoMethodService demoMethodService = context.getBean(DemoMethodService.class);
-		
-		demoAnnotationService.add();
-		
-		demoMethodService.add();
 		
 		context.close();
 	}
