@@ -4,22 +4,16 @@ package com.main;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.profile.DemoBean;
-import com.profile.ProfileConfig;
+import com.applicationevent.DemoPublisher;
+
 
 
 public class Main {
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext context= 
-				new AnnotationConfigApplicationContext();
-		
-		context.getEnvironment().setActiveProfiles("dev");//先将活动的Profile设置为dev
-		context.register(ProfileConfig.class);//后置注册Bean配置类，不然会报Bean未定义的错误
-		context.refresh();//刷新容器
-		
-		DemoBean demoBean=context.getBean(DemoBean.class);
-		
-		System.out.println(demoBean.getContent());
+				new AnnotationConfigApplicationContext(Config.class);
+		DemoPublisher demoPublisher = context.getBean(DemoPublisher.class);
+		demoPublisher.publish("hello application event");
 		
 		context.close();
 	}
