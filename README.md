@@ -1,3 +1,6 @@
 # 多线程 #
 
 Spring通过任务管理器（TaskExecutor）来实现多线程和并发编程，使用ThreadPoolTaskExecutor可实现一个基于线程池的TaskExecutor，而实际开发中任务一般是非阻碍异步的，所以我们要在配置类中通过@EnableAsync开启 对异步任务的支持，并通过在实际执行的Bean的方法中使用@Async注解来声明其是一个异步任务
+
+- 配置类实现AsyncConfigurer接口并重写getAsyncExecutor方法，并返回一个ThreadPoolTaskExecutor,这样就获得了一个基于线程池的TaskExecutor
+- 任务执行类 通过Async注解表明该方法是个异步方法，如果注解在类级别，则表明该类所有的方法都是异步方法
