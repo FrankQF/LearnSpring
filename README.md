@@ -58,3 +58,11 @@ SpringMVC通过MultipartResolve来上传文件
 				return "wrong";
 			}
 	}
+
+##服务器端推送技术##
+ - SSE Server Send Event服务端发送事件（新浏览器支持）。美体类型为text/event-stream js中使用eventSource获得
+ - Servlet3.0+异步，服务器不关闭浏览器显示pending等待请求。
+
+
+##Spring MVC 测试##
+使用MockMVC模拟请求，MockHttpServletRequest MockHttpServletResponse等模拟请求和返回
